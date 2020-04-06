@@ -390,7 +390,8 @@ async function downloadMedia(videoUrl,subsUrls,fontSize){
             for(let z=0; z<subsLangArr.length; z++){
                 let vttStr = '', cssStr = '', srtStr = '';
                 let subs4XUrl = subsUrls[subsLangArr[z]].split('/');
-                subsXUrl = getSubsUrl(subs4XUrl[subs4XUrl.length-1].replace(/.vtt$/,''));
+                let regex = /vtt\/(.*?)\//
+                subsXUrl = getSubsUrl(subs4XUrl[subs4XUrl.length-1].replace(/.vtt$/,''), subsUrls[subsLangArr[z]].match(regex)[1]);
                 // console.log(subsXUrl);
                 let getCssContent = await getData('!g!'+subsXUrl.css, '');
                 let getVttContent = await getData('!g!'+subsXUrl.vtt, '');
@@ -412,12 +413,12 @@ async function downloadMedia(videoUrl,subsUrls,fontSize){
         await muxStreams();
     }
 }
-
-function getSubsUrl(file){
-    const prefix = 'https://api.hidive.com/caption';
+//https://api.hidive.com/caption/css/*/?id=BIB_s01e002_tv_br_or_ja_en_v06.css
+function getSubsUrl(file, vttKey){
+    const prefix = 'https://www.hidive.com/caption';
     return {
-        vtt: `${prefix}/vtt/${file}.vtt`,
-        css: `${prefix}/css/?id=${file}.css`
+        vtt: `${prefix}/vtt/${vttKey}/${file}.vtt`,
+        css: `${prefix}/css/${vttKey}/?id=${file}.css`
     };
 }
 
