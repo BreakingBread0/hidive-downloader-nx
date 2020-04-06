@@ -84,9 +84,9 @@ After installing NodeJS with NPM go to directory with `package.json` file and ty
 
 `[note] movies and ovas have episode number as air date`
 
-##Updating the API Key
+## Updating the API Key
 
-The API Key for the Android version is hidden in the native library libnative-lib.so (as of 2020-04-07). You can intercept the call to picosha2 (where they generate the SHA256 Hash) in the function "Java.com.twentyfouri.sentaiapi.data.session.SentaiHeaders.generateNonce" and get the Key.
+The API Key for the Android version is hidden in the native library libnative-lib.so (as of 2020-04-07). You can intercept the call to picosha2 (where they generate the SHA256 hash) in the function "Java.com.twentyfouri.sentaiapi.data.session.SentaiHeaders.generateNonce" and get the Key.
 I am sure there is an easier version to get the key using static analysis of the binary, but I just could not be bothered to reverse it.
 
 ## TODO
