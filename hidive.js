@@ -262,12 +262,16 @@ async function getShow(){
     if(checkRes(getShowData)){return;}
     const showData = JSON.parse(getShowData.res.body).Data.Title;
     console.log(`[#${showData.Id}] ${showData.Name} [${showData.ShowInfoTitle}]`);
+    let downloadAll = false;
+    if ((argv.e ? argv.e.toString() : "") == "all") {
+        downloadAll = true;
+    }
     let selEpsInp = argv.e ? argv.e.toString().split(',') : [];
     let selEpsArr = [];
     for(let i=0;i<showData.Episodes.length;i++){
         let epKey = showData.Episodes[i].VideoKey;
         let selMark = false;
-        if(selEpsInp.includes(epKey)){
+        if(selEpsInp.includes(epKey) || downloadAll){
             selEpsArr.push(epKey);
             selMark = true;
         }
