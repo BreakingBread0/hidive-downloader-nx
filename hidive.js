@@ -12,7 +12,7 @@ const modulesFolder = path.join(__dirname,'modules');
 
 // api const
 const API_DOMAIN = "https://api.hidive.com";
-const API_KEY    = "6e6b1afcf0800e2ba312bce28d1dbccc87120904";
+const API_KEY    = "ee32bb768db4ac42fc1d0fcdafb11facb3a8a93a";
 
 // app id
 const devName = "Android";
