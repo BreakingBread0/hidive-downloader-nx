@@ -392,6 +392,7 @@ async function downloadMedia(videoUrl,subsUrls,fontSize){
         argv.nosubs = argv.dub == 'jpn' ? false : argv.nosubs;
         if(!argv.nosubs && subsLangArr.length > 0){
             for(let z=0; z<subsLangArr.length; z++){
+                try {
                 let vttStr = '', cssStr = '', srtStr = '';
                 let subs4XUrl = subsUrls[subsLangArr[z]].split('/');
                 let regex = /vtt\/(.*?)\//
@@ -411,6 +412,9 @@ async function downloadMedia(videoUrl,subsUrls,fontSize){
                         langCode: getLangCode(subsLangArr[z])
                     });
                     console.log(`[INFO] Subtitle downloaded and converted: ${subFn}`);
+                }
+                }catch (error) {
+                    console.log("[ERROR] Subtitle download failed: " + subsLangArr[z] + "\n\n" + error);
                 }
             }
         }
